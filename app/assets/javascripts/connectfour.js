@@ -44,6 +44,9 @@ ConnectFour.drop = function(col){
 		if(winner){
 			alert(winner + ' won!');
 			this.reset();
+		} else if(this.isBoardFull()){
+			alert('Tie!');
+			this.reset();
 		} else {
 			this.updateTurn();
 		}
@@ -71,6 +74,18 @@ ConnectFour.checkLine = function(w,x,y,z){
     return w != null && w == x && w==y && w==z;
 };
 
+ConnectFour.isBoardFull = function(){
+	var full = true;
+	for(col = 0 ; col < this.colSize; col++){
+		for (row=0; row < this.rowSize; row++){
+			if(this.Board[col][row] == null){
+				full = false;
+				break;
+			}
+		}
+	}
+	return full;
+};
 ConnectFour.checkWinner = function(){
 	//check horizontal win
 	for( row = 0; row < 3; row++){
