@@ -1,4 +1,31 @@
-<h2>Hello World</h2>
-<p>
-  The time is now: <%= Time.now %>
-</p>
+<html>
+<head>
+    <script type="text/javascript">
+        document.onready = function(){
+	    	ConnectFour.init(<%= @board.rowSize %>, <%= @board.colSize %>);
+        }
+    </script>
+</head>
+<body>
+	<h2>Connect Four - ROR</h2> 
+	Player <span id="currentTurn"></span>'s turn
+	<table cellspacing="0" cellpadding="0" border="0">
+	 <tbody>
+	 	<% for row in 0...@board.rowSize do %>
+	 	   <tr>
+	 	   		<% for col in 0...@board.colSize do %>
+	 	   		<td>
+	 	   			<a href="javascript:ConnectFour.drop(<%= col.to_s%>)">
+	 	   				<%= image_tag "empty.gif", :border=>0, :id => 'cell' + row.to_s + '' + col.to_s + "empty" %>
+	 	   				<%= image_tag "blue.gif", :border=>0, :id => 'cell' + row.to_s + '' + col.to_s + "blue", :style=>"display:none" %>
+	 	   				<%= image_tag "red.gif", :border=>0, :id => 'cell' + row.to_s + '' + col.to_s + "red", :style=>"display:none"  %>
+	 	   			</a>
+	 	   		</td>
+	 	   		<% end %>
+	 	   </tr>
+	 	<%end%>	
+	 </tbody>
+	</table>
+	<button onclick="ConnectFour.reset()">Reset</button>
+</body>
+</html>
